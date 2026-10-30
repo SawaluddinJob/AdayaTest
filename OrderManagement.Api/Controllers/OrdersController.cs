@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Application.DTOs.Orders;
 using OrderManagement.Application.Interfaces;
+using OrderManagement.Application.DTOs.Common;
+using OrderManagement.Application.DTOs.Orders;
 
 namespace OrderManagement.Api.Controllers
 {
@@ -11,11 +13,14 @@ namespace OrderManagement.Api.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IValidator<CreateOrderRequest> _validator;
+        private readonly IValidator<OrderListQuery> _listValidator;
 
-        public OrdersController(IOrderService orderService, IValidator<CreateOrderRequest> validator)
+        public OrdersController(IOrderService orderService, IValidator<CreateOrderRequest> validator,
+            IValidator<OrderListQuery> listValidator)
         {
             _orderService = orderService;
             _validator = validator;
+            _listValidator = listValidator;
         }
 
         [HttpPost]
@@ -39,6 +44,40 @@ namespace OrderManagement.Api.Controllers
                     message = "Order created successfully.",
                     data = result
                 });
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
+        {
+            var result = await _orderService.GetByIdAsync(
+                id,
+                cancellationToken);
+
+            return Ok(new
+            {
+                success = true,
+                message = "Order retrieved successfully.",
+                data = result
+            });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery] OrderListQuery query, CancellationToken cancellationToken)
+        {
+            await _listValidator.ValidateAndThrowAsync(
+                query,
+                cancellationToken);
+
+            var result = await _orderService.GetListAsync(
+                query,
+                cancellationToken);
+
+            return Ok(new
+            {
+                success = true,
+                message = "Orders retrieved successfully.",
+                data = result
+            });
         }
     }
 }

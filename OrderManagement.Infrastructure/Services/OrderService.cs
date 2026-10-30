@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using OrderManagement.Application.DTOs.Common;
 using OrderManagement.Application.DTOs.Orders;
 using OrderManagement.Application.Exceptions;
 using OrderManagement.Application.Interfaces;
@@ -260,6 +261,76 @@ namespace OrderManagement.Infrastructure.Services
                     Quantity = item.Quantity,
                     UnitPrice = item.UnitPrice
                 }).ToList()
+            };
+        }
+
+        public async Task<OrderResponse> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            var order = await _context.Orders
+                .AsNoTracking()
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(
+                    x => x.Id == id,
+                    cancellationToken);
+
+            if (order == null)
+            {
+                throw new NotFoundException(
+                    $"Order with ID {id} was not found.");
+            }
+
+            return MapToResponse(order);
+        }
+
+        public async Task<PagedResponse<OrderResponse>> GetListAsync(OrderListQuery query, CancellationToken cancellationToken)
+        {
+            var ordersQuery = _context.Orders
+                .AsNoTracking()
+                .AsQueryable();
+
+            if (query.Status.HasValue)
+            {
+                ordersQuery = ordersQuery.Where(
+                    x => x.Status == query.Status.Value);
+            }
+
+            if (query.CustomerId.HasValue)
+            {
+                ordersQuery = ordersQuery.Where(
+                    x => x.CustomerId == query.CustomerId.Value);
+            }
+
+            if (query.StartDate.HasValue)
+            {
+                ordersQuery = ordersQuery.Where(
+                    x => x.CreatedAt >= query.StartDate.Value);
+            }
+
+            if (query.EndDate.HasValue)
+            {
+                ordersQuery = ordersQuery.Where(
+                    x => x.CreatedAt <= query.EndDate.Value);
+            }
+
+            var totalRecords = await ordersQuery.CountAsync(
+                cancellationToken);
+
+            var orders = await ordersQuery
+                .OrderByDescending(x => x.CreatedAt)
+                .ThenByDescending(x => x.Id)
+                .Skip((query.Page - 1) * query.PageSize)
+                .Take(query.PageSize)
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .ToListAsync(cancellationToken);
+
+            return new PagedResponse<OrderResponse>
+            {
+                Data = orders.Select(MapToResponse).ToList(),
+                Page = query.Page,
+                PageSize = query.PageSize,
+                TotalRecords = totalRecords
             };
         }
     }
