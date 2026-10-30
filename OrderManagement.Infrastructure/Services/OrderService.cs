@@ -57,6 +57,21 @@ namespace OrderManagement.Infrastructure.Services
 
             try
             {
+                // 2. Reserve idempotency key
+                var idempotencyRecord = new IdempotencyKey
+                {
+                    Id = Guid.NewGuid(),
+                    Key = idempotencyKey,
+                    RequestHash = requestHash,
+                    OrderId = null,
+                    CreatedAt = DateTimeOffset.UtcNow
+                };
+
+                _context.IdempotencyKeys.Add(idempotencyRecord);
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                // 3. Create Order
                 var order = new Order
                 {
                     Id = Guid.NewGuid(),
@@ -68,7 +83,7 @@ namespace OrderManagement.Infrastructure.Services
                     UpdatedAt = DateTimeOffset.UtcNow
                 };
 
-                // 2. Process products in sorted order
+                // 4. Process products in sorted order
                 foreach (var item in request.Items.OrderBy(x => x.ProductId))
                 {
                     var product = await _context.Products
@@ -83,7 +98,7 @@ namespace OrderManagement.Infrastructure.Services
                             $"Product {item.ProductId} not found.");
                     }
 
-                    // 3. Atomic stock deduction
+                    // 5. Atomic stock deduction
                     var affectedRows = await _context.Products
                         .Where(x =>
                             x.Id == item.ProductId &&
@@ -100,7 +115,7 @@ namespace OrderManagement.Infrastructure.Services
                             $"Insufficient stock for product: {product.Name}.");
                     }
 
-                    // 4. Create order item
+                    // 6. Create order item
                     order.Items.Add(new OrderItem
                     {
                         Id = Guid.NewGuid(),
@@ -111,25 +126,30 @@ namespace OrderManagement.Infrastructure.Services
                     });
                 }
 
-                // 5. Save order
+                // 7. Save order
                 _context.Orders.Add(order);
-
-                // 6. Save idempotency key
-                _context.IdempotencyKeys.Add(new IdempotencyKey
-                {
-                    Id = Guid.NewGuid(),
-                    Key = idempotencyKey,
-                    RequestHash = requestHash,
-                    OrderId = order.Id,
-                    CreatedAt = DateTimeOffset.UtcNow
-                });
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                // 7. Commit transaction
+                // 8. Update idempotency reservation
+                idempotencyRecord.OrderId = order.Id;
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                // 9. Commit transaction
                 await transaction.CommitAsync(cancellationToken);
 
-                return MapToResponse(order);
+                _context.ChangeTracker.Clear();
+
+                var savedOrder = await _context.Orders
+                    .AsNoTracking()
+                    .Include(x => x.Items)
+                    .ThenInclude(x => x.Product)
+                    .FirstAsync(
+                        x => x.Id == order.Id,
+                        cancellationToken);
+
+                return MapToResponse(savedOrder);
             }
             catch (DbUpdateException ex)
                 when (ex.InnerException is PostgresException pg &&
@@ -175,12 +195,18 @@ namespace OrderManagement.Infrastructure.Services
                     "Idempotency key has already been used with a different request.");
             }
 
+            if (existingKey.OrderId == null)
+            {
+                throw new InvalidOperationException(
+                    "Idempotency reservation is incomplete.");
+            }
+
             var order = await _context.Orders
                 .AsNoTracking()
                 .Include(x => x.Items)
                 .ThenInclude(x => x.Product)
                 .FirstOrDefaultAsync(
-                    x => x.Id == existingKey.OrderId,
+                    x => x.Id == existingKey.OrderId.Value,
                     cancellationToken);
 
             if (order == null)

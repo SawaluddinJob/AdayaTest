@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using OrderManagement.Infrastructure.Data;
 using FluentValidation;
 using OrderManagement.Application.Validators.Orders;
+using OrderManagement.Application.Interfaces;
+using OrderManagement.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<OrderManagementDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
+
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddControllers();
 
