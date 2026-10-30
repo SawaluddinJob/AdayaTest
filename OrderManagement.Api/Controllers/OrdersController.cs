@@ -22,23 +22,9 @@ namespace OrderManagement.Api.Controllers
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request, [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey,
             CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(
+            await _validator.ValidateAndThrowAsync(
                 request,
                 cancellationToken);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(new
-                {
-                    success = false,
-                    message = "Validation failed.",
-                    errors = validationResult.Errors.Select(x => new
-                    {
-                        field = x.PropertyName,
-                        message = x.ErrorMessage
-                    })
-                });
-            }
 
             var result = await _orderService.CreateAsync(
                 request,
