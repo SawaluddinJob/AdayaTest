@@ -32,6 +32,7 @@ namespace OrderManagement.Infrastructure.Data.Configurations
             builder.HasOne(x => x.Order)
                 .WithMany()
                 .HasForeignKey(x => x.OrderId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

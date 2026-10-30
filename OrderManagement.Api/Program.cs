@@ -1,7 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using OrderManagement.Infrastructure.Data;
+using FluentValidation;
+using OrderManagement.Application.Validators.Orders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddValidatorsFromAssemblyContaining<
+    CreateOrderRequestValidator>();
 
 builder.Services.AddDbContext<OrderManagementDbContext>(options =>
     options.UseNpgsql(

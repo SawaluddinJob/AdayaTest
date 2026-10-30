@@ -13,3 +13,4 @@ D:\TEST\AdayaTest\OrderManagement.Application\obj\Debug\net10.0\OrderManagement.
 D:\TEST\AdayaTest\OrderManagement.Application\obj\Debug\net10.0\refint\OrderManagement.Application.dll
 D:\TEST\AdayaTest\OrderManagement.Application\obj\Debug\net10.0\OrderManagement.Application.pdb
 D:\TEST\AdayaTest\OrderManagement.Application\obj\Debug\net10.0\ref\OrderManagement.Application.dll
+D:\TEST\AdayaTest\OrderManagement.Application\obj\Debug\net10.0\OrderManagement.Application.sourcelink.json

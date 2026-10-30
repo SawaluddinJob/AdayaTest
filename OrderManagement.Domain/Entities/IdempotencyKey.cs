@@ -12,7 +12,7 @@ namespace OrderManagement.Domain.Entities
 
         public string RequestHash { get; set; } = string.Empty;
 
-        public Guid OrderId { get; set; }
+        public Guid? OrderId { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
 

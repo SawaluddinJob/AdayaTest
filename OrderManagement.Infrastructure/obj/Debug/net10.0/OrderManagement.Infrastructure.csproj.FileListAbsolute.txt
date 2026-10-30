@@ -15,3 +15,4 @@ D:\TEST\AdayaTest\OrderManagement.Infrastructure\obj\Debug\net10.0\OrderManageme
 D:\TEST\AdayaTest\OrderManagement.Infrastructure\obj\Debug\net10.0\refint\OrderManagement.Infrastructure.dll
 D:\TEST\AdayaTest\OrderManagement.Infrastructure\obj\Debug\net10.0\OrderManagement.Infrastructure.pdb
 D:\TEST\AdayaTest\OrderManagement.Infrastructure\obj\Debug\net10.0\ref\OrderManagement.Infrastructure.dll
+D:\TEST\AdayaTest\OrderManagement.Infrastructure\obj\Debug\net10.0\OrderManagement.Infrastructure.sourcelink.json

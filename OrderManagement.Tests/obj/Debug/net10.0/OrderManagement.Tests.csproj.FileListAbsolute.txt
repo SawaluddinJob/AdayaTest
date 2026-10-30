@@ -138,3 +138,6 @@ D:\TEST\AdayaTest\OrderManagement.Tests\bin\Debug\net10.0\Serilog.Sinks.File.dll
 D:\TEST\AdayaTest\OrderManagement.Tests\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\TEST\AdayaTest\OrderManagement.Tests\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\TEST\AdayaTest\OrderManagement.Tests\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\TEST\AdayaTest\OrderManagement.Tests\bin\Debug\net10.0\FluentValidation.dll
+D:\TEST\AdayaTest\OrderManagement.Tests\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\TEST\AdayaTest\OrderManagement.Tests\obj\Debug\net10.0\OrderManagement.Tests.sourcelink.json
