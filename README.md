@@ -56,18 +56,6 @@ dotnet ef database update \
   --startup-project OrderManagement.Api
 ```
 
-Jika `dotnet-ef` belum terpasang:
-
-```bash
-dotnet tool install --global dotnet-ef
-```
-
-Jika sudah terpasang tetapi perlu diperbarui:
-
-```bash
-dotnet tool update --global dotnet-ef
-```
-
 ## Menjalankan Aplikasi
 
 Jalankan perintah:
