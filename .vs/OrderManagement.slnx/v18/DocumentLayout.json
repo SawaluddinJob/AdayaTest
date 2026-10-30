@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\TEST\\AdayaTest\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1814A3F6-8E75-02C7-C1FC-C957E0F381D7}|OrderManagement.IntegrationTests\\OrderManagement.IntegrationTests.csproj|d:\\test\\adayatest\\ordermanagement.integrationtests\\orders\\orderconcurrencytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1814A3F6-8E75-02C7-C1FC-C957E0F381D7}|OrderManagement.IntegrationTests\\OrderManagement.IntegrationTests.csproj|solutionrelative:ordermanagement.integrationtests\\orders\\orderconcurrencytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7BC10112-E9D1-7ADB-57B6-D48271AABBD5}|OrderManagement.Application\\OrderManagement.Application.csproj|d:\\test\\adayatest\\ordermanagement.application\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BC10112-E9D1-7ADB-57B6-D48271AABBD5}|OrderManagement.Application\\OrderManagement.Application.csproj|solutionrelative:ordermanagement.application\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AD14F77F-030D-D8C9-61F4-026F2C6AD086}|OrderManagement.Api\\OrderManagement.Api.csproj|d:\\test\\adayatest\\ordermanagement.api\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD14F77F-030D-D8C9-61F4-026F2C6AD086}|OrderManagement.Api\\OrderManagement.Api.csproj|solutionrelative:ordermanagement.api\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{490C94DE-A5AC-AB5B-AAC9-A576304D79A7}|OrderManagement.Infrastructure\\OrderManagement.Infrastructure.csproj|d:\\test\\adayatest\\ordermanagement.infrastructure\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{490C94DE-A5AC-AB5B-AAC9-A576304D79A7}|OrderManagement.Infrastructure\\OrderManagement.Infrastructure.csproj|solutionrelative:ordermanagement.infrastructure\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BC10112-E9D1-7ADB-57B6-D48271AABBD5}|OrderManagement.Application\\OrderManagement.Application.csproj|d:\\test\\adayatest\\ordermanagement.application\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BC10112-E9D1-7ADB-57B6-D48271AABBD5}|OrderManagement.Application\\OrderManagement.Application.csproj|solutionrelative:ordermanagement.application\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AD14F77F-030D-D8C9-61F4-026F2C6AD086}|OrderManagement.Api\\OrderManagement.Api.csproj|d:\\test\\adayatest\\ordermanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,11 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "OrderConcurrencyTests.cs",
+              "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.IntegrationTests\\Orders\\OrderConcurrencyTests.cs",
+              "RelativeDocumentMoniker": "OrderManagement.IntegrationTests\\Orders\\OrderConcurrencyTests.cs",
+              "ToolTip": "D:\\TEST\\AdayaTest\\OrderManagement.IntegrationTests\\Orders\\OrderConcurrencyTests.cs",
+              "RelativeToolTip": "OrderManagement.IntegrationTests\\Orders\\OrderConcurrencyTests.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-30T22:40:33.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "IOrderService.cs",
               "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.Application\\Interfaces\\IOrderService.cs",
               "RelativeDocumentMoniker": "OrderManagement.Application\\Interfaces\\IOrderService.cs",
@@ -51,20 +68,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "OrdersController.cs",
               "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.Api\\Controllers\\OrdersController.cs",
               "RelativeDocumentMoniker": "OrderManagement.Api\\Controllers\\OrdersController.cs",
               "ToolTip": "D:\\TEST\\AdayaTest\\OrderManagement.Api\\Controllers\\OrdersController.cs",
               "RelativeToolTip": "OrderManagement.Api\\Controllers\\OrdersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-30T20:54:02.472Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "OrderService.cs",
               "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.Infrastructure\\Services\\OrderService.cs",
               "RelativeDocumentMoniker": "OrderManagement.Infrastructure\\Services\\OrderService.cs",
@@ -72,12 +89,11 @@
               "RelativeToolTip": "OrderManagement.Infrastructure\\Services\\OrderService.cs",
               "ViewState": "AgIAAEkBAAAAAAAAAAAgwFABAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-30T20:27:13.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-30T20:27:13.495Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "CreateOrderRequestValidator.cs",
               "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.Application\\Validators\\Orders\\CreateOrderRequestValidator.cs",
               "RelativeDocumentMoniker": "OrderManagement.Application\\Validators\\Orders\\CreateOrderRequestValidator.cs",
@@ -85,12 +101,11 @@
               "RelativeToolTip": "OrderManagement.Application\\Validators\\Orders\\CreateOrderRequestValidator.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAADIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-30T20:20:13.077Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-30T20:20:13.077Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.Api\\Program.cs",
               "RelativeDocumentMoniker": "OrderManagement.Api\\Program.cs",
@@ -98,12 +113,11 @@
               "RelativeToolTip": "OrderManagement.Api\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-30T19:15:35.508Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-30T19:15:35.508Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "OrderManagementDbContext.cs",
               "DocumentMoniker": "D:\\TEST\\AdayaTest\\OrderManagement.Infrastructure\\Data\\OrderManagementDbContext.cs",
               "RelativeDocumentMoniker": "OrderManagement.Infrastructure\\Data\\OrderManagementDbContext.cs",
@@ -111,8 +125,7 @@
               "RelativeToolTip": "OrderManagement.Infrastructure\\Data\\OrderManagementDbContext.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAkwB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-30T19:13:36.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-30T19:13:36.961Z"
             }
           ]
         }

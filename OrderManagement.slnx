@@ -3,5 +3,6 @@
   <Project Path="OrderManagement.Application/OrderManagement.Application.csproj" />
   <Project Path="OrderManagement.Domain/OrderManagement.Domain.csproj" />
   <Project Path="OrderManagement.Infrastructure/OrderManagement.Infrastructure.csproj" />
+  <Project Path="OrderManagement.IntegrationTests/OrderManagement.IntegrationTests.csproj" />
   <Project Path="OrderManagement.Tests/OrderManagement.Tests.csproj" />
 </Solution>
