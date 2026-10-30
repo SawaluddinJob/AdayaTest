@@ -1,0 +1,11 @@
+D:\TEST\AdayaTest\OrderManagement.Domain\bin\Debug\net10.0\OrderManagement.Domain.deps.json
+D:\TEST\AdayaTest\OrderManagement.Domain\bin\Debug\net10.0\OrderManagement.Domain.dll
+D:\TEST\AdayaTest\OrderManagement.Domain\bin\Debug\net10.0\OrderManagement.Domain.pdb
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\OrderManagement.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\OrderManagement.Domain.AssemblyInfoInputs.cache
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\OrderManagement.Domain.AssemblyInfo.cs
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\OrderManagement.Domain.csproj.CoreCompileInputs.cache
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\OrderManagement.Domain.dll
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\refint\OrderManagement.Domain.dll
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\OrderManagement.Domain.pdb
+D:\TEST\AdayaTest\OrderManagement.Domain\obj\Debug\net10.0\ref\OrderManagement.Domain.dll
