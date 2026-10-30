@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Application.DTOs.Orders;
 using OrderManagement.Application.Interfaces;
 using OrderManagement.Application.DTOs.Common;
-using OrderManagement.Application.DTOs.Orders;
 
 namespace OrderManagement.Api.Controllers
 {
@@ -78,6 +77,28 @@ namespace OrderManagement.Api.Controllers
                 message = "Orders retrieved successfully.",
                 data = result
             });
+        }
+
+        [HttpPut("{id:guid}/status")]
+        public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateOrderStatusRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _orderService.UpdateStatusAsync(
+                id,
+                request,
+                cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpPost("{id:guid}/cancel")]
+        public async Task<IActionResult> Cancel(Guid id, [FromBody] CancelOrderRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _orderService.CancelAsync(
+                id,
+                request,
+                cancellationToken);
+
+            return Ok(result);
         }
     }
 }

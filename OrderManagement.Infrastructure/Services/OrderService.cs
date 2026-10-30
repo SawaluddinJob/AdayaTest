@@ -333,5 +333,128 @@ namespace OrderManagement.Infrastructure.Services
                 TotalRecords = totalRecords
             };
         }
+
+        public async Task<OrderResponse> UpdateStatusAsync(Guid id, UpdateOrderStatusRequest request, CancellationToken cancellationToken)
+        {
+            var order = await _context.Orders
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+            if (order == null)
+                throw new NotFoundException($"Order dengan ID {id} tidak ditemukan.");
+
+            if (order.Version != request.Version)
+                throw new ConflictException(
+                    "Order sudah diperbarui oleh admin lain. Silakan refresh data.");
+
+            var isValidTransition = order.Status switch
+            {
+                OrderStatus.Pending =>
+                    request.Status == OrderStatus.Confirmed ||
+                    request.Status == OrderStatus.Cancelled,
+
+                OrderStatus.Confirmed =>
+                    request.Status == OrderStatus.Shipped ||
+                    request.Status == OrderStatus.Cancelled,
+
+                OrderStatus.Shipped =>
+                    request.Status == OrderStatus.Delivered,
+
+                _ => false
+            };
+
+            if (!isValidTransition)
+                throw new ConflictException(
+                    $"Perubahan status dari {order.Status} ke {request.Status} tidak diperbolehkan.");
+
+            if (request.Status == OrderStatus.Cancelled)
+                throw new ConflictException(
+                    "Gunakan endpoint Cancel Order untuk membatalkan pesanan.");
+
+            var now = DateTimeOffset.UtcNow;
+
+            var affectedRows = await _context.Orders
+                .Where(x =>
+                    x.Id == id &&
+                    x.Version == request.Version &&
+                    x.Status == order.Status)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(x => x.Status, request.Status)
+                    .SetProperty(x => x.Version, x => x.Version + 1)
+                    .SetProperty(x => x.UpdatedAt, now),
+                    cancellationToken);
+
+            if (affectedRows == 0)
+                throw new ConflictException(
+                    "Order telah diubah oleh admin lain. Silakan refresh data.");
+
+            _context.ChangeTracker.Clear();
+
+            return await GetByIdAsync(id, cancellationToken);
+        }
+
+        public async Task<OrderResponse> CancelAsync(Guid id, CancelOrderRequest request, CancellationToken cancellationToken)
+        {
+            await using var transaction =
+                await _context.Database.BeginTransactionAsync(cancellationToken);
+
+            var order = await _context.Orders
+                .AsNoTracking()
+                .Include(x => x.Items)
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+            if (order == null)
+                throw new NotFoundException($"Order dengan ID {id} tidak ditemukan.");
+
+            if (order.Version != request.Version)
+                throw new ConflictException(
+                    "Order sudah diperbarui oleh admin lain. Silakan refresh data.");
+
+            if (order.Status != OrderStatus.Pending &&
+                order.Status != OrderStatus.Confirmed)
+            {
+                throw new ConflictException(
+                    $"Order dengan status {order.Status} tidak dapat dibatalkan.");
+            }
+
+            var now = DateTimeOffset.UtcNow;
+
+            var affectedRows = await _context.Orders
+                .Where(x =>
+                    x.Id == id &&
+                    x.Version == request.Version &&
+                    (x.Status == OrderStatus.Pending ||
+                     x.Status == OrderStatus.Confirmed))
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(x => x.Status, OrderStatus.Cancelled)
+                    .SetProperty(x => x.Version, x => x.Version + 1)
+                    .SetProperty(x => x.UpdatedAt, now),
+                    cancellationToken);
+
+            if (affectedRows == 0)
+                throw new ConflictException(
+                    "Order telah diubah atau dibatalkan oleh admin lain.");
+
+            foreach (var item in order.Items.OrderBy(x => x.ProductId))
+            {
+                var restoredRows = await _context.Products
+                    .Where(x => x.Id == item.ProductId)
+                    .ExecuteUpdateAsync(setters => setters
+                        .SetProperty(
+                            x => x.StockQuantity,
+                            x => x.StockQuantity + item.Quantity),
+                        cancellationToken);
+
+                if (restoredRows == 0)
+                    throw new ConflictException(
+                        $"Produk {item.ProductId} tidak ditemukan saat mengembalikan stok.");
+            }
+
+            await transaction.CommitAsync(cancellationToken);
+
+            _context.ChangeTracker.Clear();
+
+            return await GetByIdAsync(id, cancellationToken);
+        }
     }
 }

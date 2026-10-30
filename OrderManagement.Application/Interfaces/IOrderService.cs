@@ -22,5 +22,15 @@ namespace OrderManagement.Application.Interfaces
         Task<PagedResponse<OrderResponse>> GetListAsync(
             OrderListQuery query,
             CancellationToken cancellationToken);
+
+        Task<OrderResponse> UpdateStatusAsync(
+            Guid id,
+            UpdateOrderStatusRequest request,
+            CancellationToken cancellationToken);
+
+        Task<OrderResponse> CancelAsync(
+            Guid id,
+            CancelOrderRequest request,
+            CancellationToken cancellationToken);
     }
 }
