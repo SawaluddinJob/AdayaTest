@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderManagement.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c6fe30b733bc8c41a86acbc92476e4ec6d3beac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70d7f942fd213abba6c245db474d94e920c2ce90")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderManagement.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderManagement.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
