@@ -145,6 +145,33 @@ Content-Type: application/json
 
 Pembatalan hanya diperbolehkan untuk order berstatus `Pending` atau `Confirmed`.
 
+## Idempotency
+
+- Setiap request create order menggunakan Idempotency-Key.
+- Database memiliki unique constraint pada key.
+- Reservasi key dan pembuatan order dilakukan dalam satu transaksi.
+- Request duplikat dengan payload sama mendapatkan order yang sama.
+- Key yang sama dengan payload berbeda menghasilkan conflict.
+
+## Persistensi Data
+
+Aplikasi ini menggunakan **PostgreSQL** dengan Entity Framework Core.
+
+PostgreSQL dipilih karena : 
+- Mendukung transaksi.
+- Menjaga konsistensi data.
+- Menangani proses bersamaan (concurrency).
+
+Selain itu, PostgreSQL mendukung berbagai constraint dan indexing untuk menjaga integritas serta meningkatkan efisiensi query database.
+
+Database terdiri dari tabel:
+- `Products`
+- `Orders`
+- `OrderItems`
+- `IdempotencyKeys`
+
+Struktur database dikelola menggunakan EF Core Migration yang tersedia di folder `OrderManagement.Infrastructure/Migrations`.
+
 ## Error Handling
 
 HTTP status :
